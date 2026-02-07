@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dancing+Script', cursive;
+            background: linear-gradient(to bottom, #ff69b4, #ff1493);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+            cursor: pointer;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .bear-container {
+            display: inline-block;
+            margin: 20px auto;
+        }
+        .bear {
+            font-size: 100px;
+            cursor: pointer;
+            display: block;
+        }
+        .envelope {
+            font-size: 50px;
+            margin: 10px auto;
+            display: block;
+            cursor: pointer;
+        }
+        .banner {
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff1493;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            max-width: 500px;
+            display: none;
+            font-size: 18px;
+            border: 2px solid #ff69b4;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .pictures {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .pictures img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        .question {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        button {
+            font-family: 'Dancing+Script', cursive;
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .yes-btn {
+            background: #ff69b4;
+            color: white;
+        }
+        .no-btn {
+            background: #ccc;
+            color: black;
+        }
+        .cry-bear {
+            display: none;
+            font-size: 50px;
+            color: #ff1493;
+        }
+        .love-text {
+            display: none;
+            font-size: 50px;
+            color: #ff1493;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .dancing-bears {
+            display: none;
+            position: relative;
+            height: 200px;
+        }
+        .dance-bear {
+            position: absolute;
+            font-size: 50px;
+            animation: dance 2s infinite;
+        }
+        .dance-bear:nth-child(1) { left: 10%; }
+        .dance-bear:nth-child(2) { left: 25%; }
+        .dance-bear:nth-child(3) { left: 40%; }
+        .dance-bear:nth-child(4) { left: 55%; }
+        .dance-bear:nth-child(5) { left: 70%; }
+        @keyframes dance {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .letter-banner {
+            position: absolute;
+            top: 60px;
+            font-size: 30px;
+            color: #ff1493;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ff69b4;
+        }
+        .letter-banner:nth-child(1) { left: 10%; content: "K"; }
+        .letter-banner:nth-child(2) { left: 25%; content: "A"; }
+        .letter-banner:nth-child(3) { left: 40%; content: "N"; }
+        .letter-banner:nth-child(4) { left: 55%; content: "A"; }
+        .letter-banner:nth-child(5) { left: 70%; content: "N"; }
+        .run {
+            animation: run 2s ease-in-out;
+        }
+        @keyframes run {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(0); }
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: float 3s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        .happy-propose {
+            display: none;
+            font-size: 30px;
+            color: #ff1493;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body onclick="advanceStep(event)">
+    <div class="hearts">
+        <div class="heart" style="left: 10%; animation-delay: 0s;">♥</div>
+        <div class="heart" style="left: 20%; animation-delay: 1s;">♥</div>
+        <div class="heart" style="left: 30%; animation-delay: 2s;">♥</div>
+        <div class="heart" style="left: 40%; animation-delay: 3s;">♥</div>
+        <div class="heart" style="left: 50%; animation-delay: 4s;">♥</div>
+        <div class="heart" style="left: 60%; animation-delay: 5s;">♥</div>
+        <div class="heart" style="left: 70%; animation-delay: 6s;">♥</div>
+        <div class="heart" style="left: 80%; animation-delay: 7s;">♥</div>
+        <div class="heart" style="left: 90%; animation-delay: 8s;">♥</div>
+    </div>
+    <div class="container">
+        <h1>Happy Valentine's Day, My Love!</h1>
+        
+        <!-- Step 1: First Teddy Bear with Banner -->
+        <div id="step1">
+            <div class="bear-container">
+                <div class="bear" onclick="showBanner1(event)">🧸</div>
+                <div class="banner" id="banner1">
+                    My dearest Kanan, from the moment I met you, my world has been filled with joy and love. You are my sunshine on cloudy days, my laughter in quiet moments, and my heart's true desire. Every day with you feels like a beautiful adventure, and I can't imagine my life without you. You make me a better person, and I cherish every second we spend together.All the Ups and downs of the life with you feels like nothing .... You are that chaos I will love to have in my life forever and loves to listen you all day and night ..... Happy Propose Day – you are my everything!
+                </div>
+            </div>
+            <p>Click the teddy bear to reveal the banner!</p>
+        </div>
+        
+        <!-- Step 2: Second Teddy Bear with Banner -->
+        <div id="step2" style="display: none;">
+            <div class="bear-container">
+                <div class="bear run" id="bear2">🧸</div>
+                <div class="banner" id="banner2">
+                    This is dedicated to you, my love: Kanan, 
+my forever, my soulmate, my best friend, my KUKI, my wiffeeyy, my pandu , my gol gappa , my world, meri jaan , meri princess , mera sukoon , my world, my chotu don . You inspire me every day!
+                </div>
+            </div>
+            <p>The teddy bear is running with a special dedication banner!</p>
+        </div>
+        
+        <!-- Step 3: Third Teddy Bear with Pictures -->
+        <div id="step3" style="display: none;">
+            <div class="bear-container">
+                <div class="bear run" id="bear3">🧸</div>
+                <div class="envelope" onclick="showPictures(event)">✉️</div>
+            </div>
+            <p>Another teddy bear is here – click the envelope for memories!</p>
+        </div>
+        
+     <!-- Pictures -->
+<div id="pictures" class="pictures" style="display: none;">
+    <img src="https://drive.google.com/uc?export=view&id=1Cbb-gANCW5exHs3Y0IopoLHdd9HS6Vqz" alt="Memory 1">
+    <img src="https://i.imgur.com/example2.jpg" alt="Memory 2"> <!-- Replace with your second image link -->
+    <img src="https://i.imgur.com/example3.jpg" alt="Memory 3"> <!-- Replace with your third image link -->
+    <img src="https://i.imgur.com/example4.jpg" alt="Memory 4"> <!-- Replace with your fourth image link -->
+</div>
+        
+        <!-- Final Question -->
+        <div id="question" style="display: none;">
+            <div class="question">Will you be my Valentine and will you be my soulmate?</div>
+            <div class="buttons">
+                <button class="no-btn" onclick="showCry()">No</button>
+                <button class="yes-btn" onclick="showLove()">Yes</button>
+            </div>
+        </div>
+        
+        <!-- Cry Bear -->
+        <div id="cry" class="cry-bear">Billu is crying 😢 <button onclick="reattempt()">Reattempt</button></div>
+        
+        <!-- Love Text and Dancing Bears -->
+        <div id="love" class="love-text">I LOVE YOU! 💖</div>
+        <div id="dance" class="dancing-bears">
+            <div class="dance-bear">🧸<div class="letter-banner">K</div></div>
+            <div class="dance-bear">🧸<div class="letter-banner">A</div></div>
+            <div class="dance-bear">🧸<div class="letter-banner">N</div></div>
+            <div class="dance-bear">🧸<div class="letter-banner">A</div></div>
+            <div class="dance-bear">🧸<div class="letter-banner">N</div></div>
+        </div>
+        <div id="happy-propose" class="happy-propose">Happy Propose Day!</div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        let banner1Shown = false;
+        let picturesShown = false;
+
+        function showBanner1(event) {
+            event.stopPropagation();
+            document.getElementById('banner1').style.display = 'block';
+            banner1Shown = true;
+        }
+
+        function showPictures(event) {
+            event.stopPropagation();
+            document.getElementById('pictures').style.display = 'block';
+            picturesShown = true;
+        }
+
+        function advanceStep(event) {
+            if (event.target.tagName === 'BUTTON' || event.target.classList.contains('bear') || event.target.classList.contains('envelope')) return;
+            if (currentStep === 0 && banner1Shown) {
+                document.getElementById('step1').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+                document.getElementById('banner2').style.display = 'block';
+                currentStep = 1;
+            } else if (currentStep === 1) {
+                document.getElementById('step2').style.display = 'none';
+                document.getElementById('step3').style.display = 'block';
+                currentStep = 2;
+            } else if (currentStep === 2 && picturesShown) {
+                document.getElementById('pictures').style.display = 'none';
+                document.getElementById('step3').style.display = 'none';
+                document.getElementById('question').style.display = 'block';
+                currentStep = 3;
+            }
+        }
+
+        function showCry() {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('cry').style.display = 'block';
+        }
+
+        function reattempt() {
+            document.getElementById('cry').style.display = 'none';
+            document.getElementById('question').style.display = 'block';
+        }
+
+        function showLove() {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('love').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('dance').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('happy-propose').style.display = 'block';
+                }, 2000);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
